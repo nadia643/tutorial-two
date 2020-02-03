@@ -1,8 +1,6 @@
-import logo from './logo.svg';
 import './App.css';
-import React, { component } from 'react';
-import { render } from '@testing-library/react';
-
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 const Person = ({img, name, age}) => {
   return(
@@ -11,14 +9,40 @@ const Person = ({img, name, age}) => {
       <h4>name: {name}</h4>
       <h4>age: {age}</h4>
     </article>
-  )
+  );
+};
+Person.propTypes = {
+  img: PropTypes.string,
+  name: PropTypes.string,
+  age: PropTypes.number
 }
 
 class PersonList extends Component {
+  state = {
+    people: [
+      {
+        id: 1,
+        img: "https://randomuser.me/api/portraits/thumb/men/75.jpg",
+        name: "Honey Boo Boo",
+        age: 8
+      },
+      {
+        id: 2,
+        img: "https://randomuser.me/api/portraits/thumb/men/35.jpg",
+        name: "Honey Boo Boo's mum",
+        age: 59
+      }
+    ]
+  }
   render() {
     return (
-      <section>
-        <Person />
+      <section> {this.state.people.map((person) =>(
+        <Person 
+        key={person.id} 
+        img={person.img} 
+        name={person.name} 
+        age={person.age} />
+      ))}
       </section>
     )
   }
