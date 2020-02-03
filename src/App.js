@@ -1,56 +1,63 @@
 import './App.css';
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 
-const Person = ({img, name, age}) => {
-  return(
-    <article>
-      <img src={img} alt="person" />
-      <h4>name: {name}</h4>
-      <h4>age: {age}</h4>
-    </article>
-  );
+class Form extends Component {
+  state = {
+    firstName: "",
+    lastName: "",
+    people: []
+  }
+  handleChange = (event) => {
+    // console.log(event.target);
+    // console.log(event.target.name);
+    // console.log(event.target.value);
+
+  //   if (event.target.name === 'firstName') {
+  //     const textValue = event.target.value;  
+  //   this.setState({
+  //     firstName: textValue
+  //   });
+
+  // }
+this.setState({
+  [event.target.name]:[event.target.value]
+})
 };
-Person.propTypes = {
-  img: PropTypes.string,
-  name: PropTypes.string,
-  age: PropTypes.number
+
+handleSubmit = (e) => {
+  e.preventDefault(); //app doesn't get refreshed unless you press submit
 }
 
-class PersonList extends Component {
-  state = {
-    people: [
-      {
-        id: 1,
-        img: "https://randomuser.me/api/portraits/thumb/men/75.jpg",
-        name: "Honey Boo Boo",
-        age: 8
-      },
-      {
-        id: 2,
-        img: "https://randomuser.me/api/portraits/thumb/men/35.jpg",
-        name: "Honey Boo Boo's mum",
-        age: 59
-      }
-    ]
-  }
   render() {
-    return (
-      <section> {this.state.people.map((person) =>(
-        <Person 
-        key={person.id} 
-        img={person.img} 
-        name={person.name} 
-        age={person.age} />
-      ))}
-      </section>
-    )
+    return <section>
+      <article>
+        <form onSubmit={this.handleSubmit}>
+          <input 
+          type="text" 
+          name="firstName" 
+          value={this.state.firstName}
+          onChange={this.handleChange} 
+          />
+          <input 
+          type="text" 
+          name="lastName"
+          value={this.state.lastName}
+          onChange={this.handleChange}  />
+        <button tpye="submit">Submit</button>
+
+        </form> </article>
+      <article>
+        <h1>People</h1>
+        <div>{this.state.people}</div>
+      </article>
+    </section>
   }
+
 }
 
 class App extends Component {
   render() {
-    return <PersonList />
+    return <Form />;
   }
 }
 
