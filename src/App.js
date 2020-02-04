@@ -15,19 +15,19 @@ class Counter extends Component {
     // this.setState({
     //   count: this.state.count + 2
     // });
-    console.log('called third:', this.state.count);
+    // console.log('called third:', this.state.count);
   }
 
   handleDecrease = () => {
-    // console.log('called first:', this.state.count);
+    console.log('called first:', this.state.count);
     this.setState((state, props) => {
-      return {count: state.count -1 }
-    });
-    this.setState((state, props) => {
-      return {count: state.count -1 }
-    });
+      return {count: state.count -1 };
+    }, () => console.log('called second: ' , this.state.count));
+    // this.setState((state, props) => {
+    //   return {count: state.count -2 }
+    // });
 
-    // console.log('called third:', this.state.count);
+    console.log('called third:', this.state.count);
 
   }
   render() {
